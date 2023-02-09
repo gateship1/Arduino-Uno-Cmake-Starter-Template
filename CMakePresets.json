@@ -1,0 +1,55 @@
+{
+    "version": 2,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 20,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "arduino-base",
+            "displayName": "Arduino Base",
+            "generator": "Ninja",
+            "binaryDir": "build",
+            "cacheVariables": 
+            {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
+                "CMAKE_TOOLCHAIN_FILE": 
+                {
+                   "type": "FILEPATH",
+                   "value": "${sourceDir}/cmake/Arduino-toolchain.cmake"
+                }
+            }
+        },
+        {
+            "name": "arduino-uno-debug",
+            "displayName": "Arduino Uno Debug",
+            "inherits": "arduino-base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_FLAGS": "-Os -DF_CPU=16000000UL -mmcu=atmega328p -Wall -pedantic -Werror -Wfatal-errors -g -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -fno-split-wide-types -fno-tree-scev-cprop"
+            }
+        },
+        {
+            "name": "arduino-uno-release",
+            "displayName": "Arduino Uno Release",
+            "inherits": "arduino-base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_FLAGS": "-Os -DF_CPU=16000000UL -mmcu=atmega328p -Wall -pedantic -Werror -Wfatal-errors -g -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -fno-split-wide-types -fno-tree-scev-cprop"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "arduino-uno-debug",
+            "configurePreset": "arduino-uno-debug"
+        },
+        {
+            "name": "arduino-uno-release",
+            "configurePreset": "arduino-uno-release"
+        }
+    ]
+}
