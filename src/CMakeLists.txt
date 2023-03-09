@@ -1,8 +1,7 @@
 add_library(arduino_${PROJECT_NAME} STATIC)
 
 target_sources(arduino_${PROJECT_NAME}
-    PRIVATE loop.cpp
-            setup.cpp
+    PRIVATE Application.cpp
 )
 
 target_include_directories(arduino_${PROJECT_NAME}

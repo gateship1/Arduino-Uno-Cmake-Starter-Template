@@ -1,11 +1,11 @@
-#include "setup.hpp"
-#include "loop.hpp"
+#include "Application.h"
 
 int main(void) {
 
-    setup();
+    Application App;
 
-    loop();
+    App.init();
+    App.run();
 
     return 0;
 

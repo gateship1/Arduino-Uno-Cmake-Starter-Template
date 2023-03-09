@@ -1,5 +1,5 @@
 {
-    "version": 2,
+    "version": 4,
     "cmakeMinimumRequired": {
         "major": 3,
         "minor": 20,
@@ -8,14 +8,14 @@
     "configurePresets": [
         {
             "name": "arduino-base",
+            "hidden": true,
             "displayName": "Arduino Base",
             "generator": "Ninja",
-            "binaryDir": "build",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "installDir": "${sourceDir}/out/install/${presetName}",
             "cacheVariables": 
             {
-                "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
                 "CMAKE_TOOLCHAIN_FILE": 
                 {
                    "type": "FILEPATH",
@@ -26,19 +26,22 @@
         {
             "name": "arduino-uno-debug",
             "displayName": "Arduino Uno Debug",
-            "inherits": "arduino-base",
+            "inherits": [ "arduino-base" ],
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_CXX_FLAGS": "-Os -DF_CPU=16000000UL -mmcu=atmega328p -Wall -pedantic -Werror -Wfatal-errors -g -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -fno-split-wide-types -fno-tree-scev-cprop"
+                "CMAKE_C_FLAGS": "-DF_CPU=16000000UL -mmcu=atmega328p -std=c11 -ansi -pedantic -Wall -W -Wconversion -Wshadow -Wcast-qual -Wwrite-strings -Wno-main -Wundef -Wstrict-prototypes -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -fno-split-wide-types -fno-tree-scev-cprop",
+                "CMAKE_CXX_FLAGS": "-DF_CPU=16000000UL -mmcu=atmega328p -std=c++17 -Wall -pedantic -W -Wconversion -Wshadow -Wcast-qual -Wwrite-strings -Wno-main -Wundef -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -fno-split-wide-types -fno-tree-scev-cprop",
+                "CMAKE_C_FLAGS_DEBUG": "-Os -g",
+                "CMAKE_CXX_FLAGS_DEBUG": "-Os -g"
             }
         },
         {
             "name": "arduino-uno-release",
             "displayName": "Arduino Uno Release",
-            "inherits": "arduino-base",
+            "inherits": [ "arduino-uno-debug" ],
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
-                "CMAKE_CXX_FLAGS": "-Os -DF_CPU=16000000UL -mmcu=atmega328p -Wall -pedantic -Werror -Wfatal-errors -g -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -fno-split-wide-types -fno-tree-scev-cprop"
+                "CMAKE_CXX_FLAGS_RELEASE": "-Os"
             }
         }
     ],

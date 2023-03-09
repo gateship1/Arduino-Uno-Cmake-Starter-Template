@@ -1,5 +1,6 @@
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR avr)
+set(CMAKE_CROSSCOMPILING TRUE)
 
 option(WITH_MCU "Add the mCU type to the target file name." ON)
 

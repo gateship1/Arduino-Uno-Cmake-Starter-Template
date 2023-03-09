@@ -81,7 +81,6 @@ For reference, the ATmega328p microcontroller datasheet can be found [here](http
 
 ```console
 Arduino-Uno-Cmake-Starter-Template
-├── build
 ├── cmake
 │   ├── Arduino-EXE.cmake
 │   └── Arduino-toolchain.cmake
@@ -102,12 +101,6 @@ To review each directory and file provided in the directory structure in detail,
 This is the parent directory for the project.
 
 In addition to the directories described below, the `Arduino-Uno-Cmake-Starter-Template` directory contains a `.gitignore` file, the main (driver) `CMakeLists.txt` file, a `CMakePresets.json` file (which contains the path to the Arduiono toolchain, compiler settings, build presets, etc.), and a `README.md` file that contains build instructions (i.e. **this** file).
-
-<br>
-
-### `build` directory
-
-The `build` directory is where all dependencies, CMakeCache.txt, CMakeFiles, libraries, binaries, etc. will be built and run from. If for some reason this directory does not ship with the code during cloning, it must be [created](#build-instructions).
 
 <br>
 
@@ -135,50 +128,36 @@ The `src` directory contains a `CMakeLists.txt` file which handles compiling and
 \[[toc](#table-of-contents)\]
 
 #
+#
 ## Build Instructions
 
-<details>
-<summary>Build In The Terminal</summary>
+- <summary>Debian / Ubuntu / MacOS:</summary> <details>
 
-- Debian / Ubuntu / MacOS:
-  
-  <details>
-  <summary>Build Procedure</summary>
+    Open a terminal and navigate to the `Arduino-Uno-Cmake-Starter-Template` directory (referred to in the following as the parent directory).
 
-    If a `build` directory does not exist in the parent directory:
+    From the parent directory:
         
-        mkdir build
-    
-    Once the `build` directory exists in the parent directory:
-        
-        cd build
-        cmake .. --preset=<preset>
+        cmake --preset=<preset>
 
-    where \<preset\> is one of the presets listed by the command
+    where \<preset\> is one of the configuration presets listed by the command
 
-        cmake .. --list-presets
+        cmake --list-presets
     
     for example,
 
-        cmake .. --preset=arduino-uno-debug
+        cmake --preset=arduino-uno-examples
 
+    Upon generating the preset configuration, an `out` directory will be created which will hold the `build` and `install` subdirectories for the configutation.
+    Navigate into the `out/build/<config>` directory.
+    This directory will now contain a `build.ninja` file.
+    
     Build the code with:
         
         ninja
-    
-    The build artifact that is useable on the Arduino Uno will be a **".hex"** file.
-    
-    #
-    **WARNING: ensure the following command is run <u>IN</u> the `build` directory or run the risk of deleting all files (they are not recoverable)!**
-    To remove all files from the `build` directory to start over:
-        
-        rm -rf *
-    
-    #
 
-  </details>
+</details>
 
-  <br>
+<br>
 
 </details>
 
